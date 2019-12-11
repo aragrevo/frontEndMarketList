@@ -1,0 +1,30 @@
+<div class="post">
+
+  <ion-item-group *ngIf="!market.state">
+    <ion-item-divider>
+      <ion-label>{{market.created | date:"dd MMMM yyyy"}}</ion-label>
+    </ion-item-divider>
+
+    <ion-item *ngFor="let item of market.products">
+      <ion-button fill="clear">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+      <ion-label>{{item.product}}</ion-label>
+      <ion-badge slot="end">{{item.quantity}}</ion-badge>
+    </ion-item>
+
+
+    <ion-item button color="danger">
+      <ion-label>Solicitar</ion-label>
+      <ion-icon slot="end" name="cart"></ion-icon>
+    </ion-item>
+  </ion-item-group>
+
+  <app-empty *ngIf="market.state"></app-empty>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</div>

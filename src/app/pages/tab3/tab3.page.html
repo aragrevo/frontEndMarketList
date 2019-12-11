@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()" color="danger">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-row>
+    <ion-col size="12">
+      <img src="assets/avatars/{{user.avatar}}" alt="avatar">
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12" class="ion-text-center">
+      <ion-label>Actualizar perfil</ion-label>
+    </ion-col>
+  </ion-row>
+
+  <form (ngSubmit)="update(formUpdate)" #formUpdate="ngForm">
+    <ion-row>
+      <ion-col size="12">
+        <ion-list>
+          <ion-item>
+            <ion-label position="floating">Nombre<ion-text color="danger">*</ion-text>
+            </ion-label>
+            <ion-input required type="text" pattern="[a-zA-Z]{3,}" [(ngModel)]="user.name" name="name"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button type="submit" color="tertiary" [disabled]="!formUpdate.valid">
+          Actualizar
+          <ion-icon slot="end" name="cloud-upload"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>

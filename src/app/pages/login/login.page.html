@@ -1,0 +1,97 @@
+<ion-content class="ion-padding">
+  <ion-slides #slidesPrincipal>
+    <ion-slide>
+      <form (ngSubmit)="login(formLogin)" #formLogin="ngForm">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col>
+              <img src="/assets/avatars/av-1.png" alt="avatar">
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-avatar>
+                  <ion-icon name="person"></ion-icon>
+                </ion-avatar>
+                <ion-label position="floating">Usuario<ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input type="text" [(ngModel)]="loginUser.name" name="name" pattern="[a-zA-Z]{3,}" required>
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit" color="tertiary" shape="round" [disabled]="!formLogin.valid">
+                Login
+                <ion-icon slot="end" name="appstore"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-slide>
+    <!-- Formulario Registro -->
+    <ion-slide>
+      <ion-grid fixed>
+        <form (ngSubmit)="logup(formLogup)" #formLogup="ngForm">
+          <ion-row>
+            <ion-col size="12">
+              <h3>Seleccione Avatar</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <ion-slides #slidesAvatar>
+                <ion-slide *ngFor="let avatar of avatars">
+                  <ion-img src="/assets/avatars/{{avatar.img}}"></ion-img>
+                </ion-slide>
+              </ion-slides>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <ion-list>
+                <ion-item>
+                  <ion-label position="floating">Nombre</ion-label>
+                  <ion-input name="name" type="text" pattern="[a-zA-Z]{3,}" [(ngModel)]="logupUser.name" required>
+                  </ion-input>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size=" 12">
+              <ion-button type="submit" color="tertiary" [disabled]="!formLogup.valid">
+                <ion-icon slot="start" name="add"></ion-icon>
+                Crear Usuario
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>
+
+<ion-footer no-border>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="block" size="small" color="medium" shape="round" (click)="showLogin()">
+          <ion-icon slot="start" name="contact"></ion-icon>
+          Ingresar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" size="small" color="light" (click)="showLogup()">
+          <ion-icon slot="start" name="at"></ion-icon>
+          Registrarme
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

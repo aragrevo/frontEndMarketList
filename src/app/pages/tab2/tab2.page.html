@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Pedido
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar></ion-searchbar>
+  <ion-slides scrollbar=true options=slideOpts>
+    <ion-slide *ngFor="let category of categories" detail>
+      <img [src]="category.image" alt="Image Category">
+
+      <ion-item *ngFor="let item of categories">
+        <ion-label>{{item.category}}</ion-label>
+
+        <ion-button slot="end" (click)="buttonClick(item.category)">
+          <ion-icon name="basket" slot="icon-only" mode="ios"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+    </ion-slide>
+  </ion-slides>
+</ion-content>
