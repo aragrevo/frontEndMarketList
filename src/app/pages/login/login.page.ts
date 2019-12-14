@@ -65,6 +65,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.slides.lockSwipes(true);
+
   }
 
   showLogin() {

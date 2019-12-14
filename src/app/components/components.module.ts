@@ -5,6 +5,10 @@ import { MarketsComponent } from './markets/markets.component';
 import { IonicModule } from '@ionic/angular';
 import { EmptyComponent } from './empty/empty.component';
 import { HeadinguserComponent } from './headinguser/headinguser.component';
+import { SubcategoriesComponent } from './subcategories/subcategories.component';
+import { HeaderComponent } from './header/header.component';
+import { ProductsComponent } from './products/products.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,15 +17,22 @@ import { HeadinguserComponent } from './headinguser/headinguser.component';
     MarketComponent,
     MarketsComponent,
     EmptyComponent,
-    HeadinguserComponent
+    HeadinguserComponent,
+    SubcategoriesComponent,
+    ProductsComponent,
+    HeaderComponent
   ],
   exports: [
     MarketsComponent,
-    HeadinguserComponent
+    HeadinguserComponent,
+    SubcategoriesComponent,
+    ProductsComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    FormsModule
   ]
 })
 export class ComponentsModule { }

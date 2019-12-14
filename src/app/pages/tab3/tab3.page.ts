@@ -12,6 +12,7 @@ import { MarketsService } from '../../services/markets.service';
 })
 export class Tab3Page implements OnInit {
 
+  titulo = 'Usuario';
   user: User = {};
 
   constructor(
@@ -30,11 +31,6 @@ export class Tab3Page implements OnInit {
     const updated = await this.userService.updateUser(this.user);
     const message = updated ? 'Usuario Actualizado' : 'No se actualizó';
     this.uiService.presentToast(message);
-  }
-
-  logout() {
-    this.marketsService.pageMarkets = 0;
-    this.userService.logout();
   }
 
 }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MarketsService } from '../../services/markets.service';
 import { Category } from 'src/app/interfaces/interfaces';
-import { UiServiceService } from '../../services/ui-service.service';
+import { IonSlides } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-tab2',
@@ -10,32 +11,25 @@ import { UiServiceService } from '../../services/ui-service.service';
 })
 export class Tab2Page implements OnInit {
 
+  titulo = 'Mercado';
   categories: Category[] = [];
-  boton: string;
+  idCategory = '';
 
-  slideOpts = {
-    initialSlide: 2,
-    speed: 400
-  };
-
+  @ViewChild('slidesCategory', { static: true }) slidesCategory: IonSlides;
 
 
   constructor(
-    private marketsService: MarketsService,
-    private uiService: UiServiceService
+    private marketsService: MarketsService
   ) { }
 
   ngOnInit() {
     this.marketsService.getCategories().subscribe(resp => {
       this.categories.push(...resp.categories);
-      console.log(this.categories);
+      this.categoryChanged();
     });
-
   }
 
-  async buttonClick(event) {
-    const product = await this.uiService.presentPicker(event);
-    console.log('product :', product);
+  async categoryChanged() {
+    this.idCategory = await this.slidesCategory.getActiveIndex().then(index => this.categories[index]._id);
   }
-
 }

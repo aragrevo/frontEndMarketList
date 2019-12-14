@@ -14,6 +14,7 @@ export class Tab1Page implements OnInit {
   markets: Market[] = [];
   user: User = {};
   enabled = false;
+  titulo = 'Pedidos';
 
   constructor(
     private marketsService: MarketsService,

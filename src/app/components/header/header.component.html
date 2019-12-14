@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-icon slot="icon-only" name="bonfire" *ngIf="titulo === 'Pedidos'"></ion-icon>
+      <ion-avatar *ngIf="titulo === 'Mercado'">
+        <img src="assets/avatars/{{user.avatar}}" alt="avatar">
+      </ion-avatar>
+    </ion-buttons>
+    <ion-buttons slot="end" *ngIf="titulo === 'Usuario'">
+      <ion-button (click)="logout()" color="danger">
+        <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{titulo}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>

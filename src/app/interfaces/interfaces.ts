@@ -6,7 +6,7 @@ export interface ResponseMarkets {
 
 export interface Market {
     state?: boolean;
-    products?: Product[];
+    products?: OrderProduct[];
     _id?: string;
     user?: User;
     created?: string;
@@ -18,19 +18,48 @@ export interface User {
     name?: string;
 }
 
-export interface Product {
-    product?: any;
-    quantity?: any;
+export interface OrderProduct {
+    product?: string;
+    _id?: string;
+    quantity?: number;
 }
 
 export interface ResponseCategories {
     ok: boolean;
-    heading: string;
+    count: number;
     categories: Category[];
 }
 
 export interface Category {
-    category: string;
-    link: string;
-    image: string;
+    _id?: string;
+    category?: string;
+    link?: string;
+    image?: string;
 }
+
+export interface ResponseSubcategories {
+    ok: boolean;
+    count: number;
+    category: string;
+    subcategories: Subcategory[];
+}
+
+export interface Subcategory {
+    _id?: string;
+    subcategory?: string;
+    link?: string;
+    category?: string;
+}
+
+export interface ResponseProducts {
+    ok: boolean;
+    count: number;
+    products: Product[];
+}
+
+export interface Product {
+    _id?: string;
+    product?: string;
+    subcategory?: Subcategory;
+}
+
