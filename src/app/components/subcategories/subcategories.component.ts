@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { Subcategory } from 'src/app/interfaces/interfaces';
 import { MarketsService } from '../../services/markets.service';
@@ -16,6 +16,7 @@ export class SubcategoriesComponent implements OnChanges {
 
 
   @Input() idCategory: string;
+  @Output() slideCategory = new EventEmitter<boolean>();
   @ViewChild('slidesSubcategory', { static: true }) slidesSubcategory: IonSlides;
 
   constructor(private marketsService: MarketsService) { }
@@ -30,15 +31,15 @@ export class SubcategoriesComponent implements OnChanges {
   slideSubChanged() {
     this.slidesSubcategory.getActiveIndex().then(index => {
       if (index === 0) {
-        // this.slidesCategory.lockSwipes(false);
         console.log('slidesSubcategory changed');
         this.slidesSubcategory.lockSwipes(true);
+        this.slideCategory.emit(false);
       }
     });
   }
 
-  async buttonClick(event) {
-    // this.slidesCategory.lockSwipes(true);
+  buttonClick(event) {
+    this.slideCategory.emit(true);
     this.idSubcategory = event;
     this.slidesSubcategory.lockSwipes(false);
     this.slidesSubcategory.slideTo(1);

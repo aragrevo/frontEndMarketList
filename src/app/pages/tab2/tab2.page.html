@@ -9,6 +9,6 @@
     </ion-slide>
   </ion-slides>
 
-  <app-subcategories [idCategory]="idCategory"></app-subcategories>
+  <app-subcategories [idCategory]="idCategory" (slideCategory)="slideLock($event)"></app-subcategories>
 
 </ion-content>

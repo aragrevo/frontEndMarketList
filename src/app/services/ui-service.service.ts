@@ -13,18 +13,18 @@ export class UiServiceService {
 
   async presentAlert(message: string) {
     const alert = await this.alertCtrl.create({
-      message,
-      buttons: ['OK']
+      message
+      // buttons: ['OK']
     });
 
     await alert.present();
   }
 
-  async presentToast(message: string) {
+  async presentToast(message: string, position: any = 'top') {
     const toast = await this.toastCtrl.create({
       message,
-      position: 'top',
-      duration: 1500
+      position,
+      duration: 1000
     });
     toast.present();
   }

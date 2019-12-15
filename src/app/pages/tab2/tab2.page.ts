@@ -14,6 +14,7 @@ export class Tab2Page implements OnInit {
   titulo = 'Mercado';
   categories: Category[] = [];
   idCategory = '';
+  // activated = false;
 
   @ViewChild('slidesCategory', { static: true }) slidesCategory: IonSlides;
 
@@ -31,5 +32,9 @@ export class Tab2Page implements OnInit {
 
   async categoryChanged() {
     this.idCategory = await this.slidesCategory.getActiveIndex().then(index => this.categories[index]._id);
+  }
+
+  slideLock(activated: boolean) {
+    this.slidesCategory.lockSwipes(activated);
   }
 }
