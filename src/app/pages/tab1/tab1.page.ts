@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MarketsService } from '../../services/markets.service';
 import { Market } from 'src/app/interfaces/interfaces';
 import { UserService } from '../../services/user.service';
-import { User } from '../../interfaces/interfaces';
+import { User, ResponseMarkets } from '../../interfaces/interfaces';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-tab1',
@@ -18,7 +19,8 @@ export class Tab1Page implements OnInit {
 
   constructor(
     private marketsService: MarketsService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private storage: Storage) { }
 
   ngOnInit() {
     this.loadData();
@@ -33,20 +35,23 @@ export class Tab1Page implements OnInit {
 
   loadData(event?, pull = false) {
 
-    this.marketsService.getMarkets(pull).subscribe(resp => {
+    this.marketsService.getMarkets(pull).then(async resp => {
+      console.log(resp);
 
-      this.markets.push(...resp.markets);
-
-      this.markets = this.markets.filter((x, index) => {
-        return x.user._id === this.user._id;
+      // this.markets = [...resp];
+      await this.storage.get('market').then(x => {
+        console.log(x);
+        this.markets = [...x];
       });
+
+      console.log(this.markets);
 
       if (event) {
         event.target.complete();
 
-        if (resp.markets.length === 0) {
-          this.enabled = false;
-        }
+        // if (resp.length === 0) {
+        //   this.enabled = false;
+        // }
       }
     });
   }

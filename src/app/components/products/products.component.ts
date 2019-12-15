@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { MarketsService } from '../../services/markets.service';
 import { OrderProduct } from '../../interfaces/interfaces';
 import { UiServiceService } from '../../services/ui-service.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-products',
@@ -13,14 +14,17 @@ export class ProductsComponent implements OnChanges {
   products: OrderProduct[] = [];
   productsOrder: OrderProduct[] = [];
 
+
   @Input() idSubcategory: string;
 
   constructor(
     private marketsService: MarketsService,
-    private uiService: UiServiceService) { }
+    private uiService: UiServiceService,
+    private storage: Storage) { }
 
   ngOnChanges() {
     this.marketsService.getProducts().subscribe(resp => {
+      console.log(resp);
       this.products = resp.products.filter((x, index) => {
         return x.subcategory._id === this.idSubcategory;
       }).map(x => {
