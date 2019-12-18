@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, EventEmitter } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { ResponseMarkets, ResponseCategories, User, ResponseSubcategories, ResponseProducts } from '../interfaces/interfaces';
+import { ResponseMarkets, ResponseCategories, User, ResponseSubcategories, ResponseProducts, Market } from '../interfaces/interfaces';
 import { UserService } from './user.service';
+import { StorageService } from './storage.service';
+import { Storage } from '@ionic/storage';
 
 
 const URL = environment.url;
@@ -15,11 +16,14 @@ export class MarketsService {
 
   pageMarkets = 0;
   user: User = {};
+  token: string = null;
+
 
   constructor(
     private http: HttpClient,
-    private storage: Storage,
-    private userService: UserService) { }
+    private storageService: StorageService,
+    private userService: UserService,
+    private storage: Storage) { }
 
   getMarkets(pull = false) {
     if (pull) {
@@ -30,7 +34,7 @@ export class MarketsService {
     return new Promise(resolve => {
 
       this.http.get<ResponseMarkets>(`${URL}/markets/?page=${this.pageMarkets}`)
-        .subscribe(async resp => {
+        .subscribe(resp => {
           // tslint:disable-next-line: no-string-literal
           if (!resp['ok']) {
             resolve(false);
@@ -41,7 +45,7 @@ export class MarketsService {
           });
 
           // tslint:disable-next-line: no-string-literal
-          await this.saveMarket(marketsUser);
+          this.storageService.saveMarket(marketsUser);
           resolve(true);
         });
     });
@@ -60,7 +64,44 @@ export class MarketsService {
     return this.http.get<ResponseProducts>(`${URL}/products/product`);
   }
 
-  async saveMarket(market: any) {
-    await this.storage.set('market', market);
+  createMarket(market: Market) {
+
+    return new Promise(async resolve => {
+
+      this.token = await this.storage.get('token').then(token => token);
+      const headers = new HttpHeaders({
+        'x-token': this.token
+      });
+
+      this.http.post(`${URL}/markets/create`, market[0], { headers })
+        .subscribe(resp => {
+          // tslint:disable-next-line: no-string-literal
+          if (!resp['ok']) {
+            resolve(false);
+            return;
+          }
+          resolve(true);
+        });
+
+
+    });
+  }
+
+  updateMarket(market: Market) {
+
+    return new Promise(resolve => {
+      const id = market[0]._id;
+
+      this.http.post(`${URL}/markets/update/${id}`, market[0].products)
+        .subscribe(async resp => {
+          // tslint:disable-next-line: no-string-literal
+          if (!resp['ok']) {
+            resolve(false);
+            return;
+          }
+          // tslint:disable-next-line: no-string-literal
+          resolve(resp['ok']);
+        });
+    });
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MarketsService } from '../../services/markets.service';
 import { Category } from 'src/app/interfaces/interfaces';
 import { IonSlides } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -20,13 +21,20 @@ export class Tab2Page implements OnInit {
 
 
   constructor(
-    private marketsService: MarketsService
+    private marketsService: MarketsService,
+    private storage: Storage
   ) { }
 
   ngOnInit() {
     this.marketsService.getCategories().subscribe(resp => {
       this.categories.push(...resp.categories);
       this.categoryChanged();
+    });
+  }
+
+  ionViewWillLeave() {
+    this.storage.get('market').then(market => {
+      console.log('storage : ', market);
     });
   }
 

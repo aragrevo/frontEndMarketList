@@ -1,10 +1,12 @@
-<app-market *ngFor="let market of markets" [market]="market"></app-market>
+<app-market *ngFor="let market of markets" [market]="market" [isRequested]="isRequest"></app-market>
 
 <app-empty *ngIf="markets.length === 0"></app-empty>
 
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="tertiary">
+    <ion-fab-button color="tertiary" (click)="goTab2()">
         <ion-icon name="add"></ion-icon>
     </ion-fab-button>
 </ion-fab>
+
+<!-- href="/main/tabs/tab2" routerDirection="forward" -->

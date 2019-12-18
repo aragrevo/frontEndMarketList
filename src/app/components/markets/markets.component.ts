@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Market } from '../../interfaces/interfaces';
+import { Route } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-markets',
@@ -9,11 +11,14 @@ import { Market } from '../../interfaces/interfaces';
 export class MarketsComponent implements OnInit {
 
   @Input() markets: Market[] = [];
+  @Input() isRequest: boolean;
 
-  constructor() { }
+  constructor(private navCtrl: NavController) { }
 
-  ngOnInit() {
-    console.log(this.markets);
+  ngOnInit() { }
+
+  goTab2() {
+    this.navCtrl.navigateForward('/main/tabs/tab2');
   }
 
 }

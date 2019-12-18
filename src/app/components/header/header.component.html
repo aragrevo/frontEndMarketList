@@ -6,9 +6,14 @@
         <img src="assets/avatars/{{user.avatar}}" alt="avatar">
       </ion-avatar>
     </ion-buttons>
-    <ion-buttons slot="end" *ngIf="titulo === 'Usuario'">
-      <ion-button (click)="logout()" color="danger">
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()" color="danger" *ngIf="titulo === 'Usuario'">
         <ion-icon slot="icon-only" name="exit"></ion-icon>
+      </ion-button>
+
+      <ion-button fill="outline" (click)="updateMarket()" *ngIf="titulo === 'Pedidos'" [disabled]="!this.user._id">
+        <ion-icon slot="start" name="cart"></ion-icon>
+        Solicitar
       </ion-button>
     </ion-buttons>
     <ion-title>
