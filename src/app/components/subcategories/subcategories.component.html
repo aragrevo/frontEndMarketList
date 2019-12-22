@@ -3,8 +3,8 @@
   <ion-slide>
     <ion-list style="width: 100%;">
       <ion-item *ngFor="let item of subcategories; let i=index" detail>
-        <!-- <ion-skeleton-text animated [ngStyle]="{'width':skeleton[i]}" *ngIf="loading"></ion-skeleton-text> -->
-        <ion-label (click)="buttonClick(item._id)">{{item.subcategory}}</ion-label>
+        <ion-skeleton-text animated [ngStyle]="{'width':skeleton[i]}" *ngIf="loading"></ion-skeleton-text>
+        <ion-label (click)="buttonClick(item._id)" *ngIf="!loading">{{item.subcategory}}</ion-label>
       </ion-item>
     </ion-list>
   </ion-slide>

@@ -1,20 +1,20 @@
 <ion-content class="ion-padding">
   <ion-slides #slidesPrincipal>
     <ion-slide>
-      <form (ngSubmit)="login(formLogin)" #formLogin="ngForm">
-        <ion-grid fixed>
-          <ion-row>
-            <ion-col>
-              <img src="/assets/avatars/av-1.png" alt="avatar">
-            </ion-col>
-          </ion-row>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col>
+            <img src="https://cdn.stocksnap.io/img-thumbs/960w/C6YGDZ1DSW.jpg" alt="avatar">
+          </ion-col>
+        </ion-row>
 
+        <form (ngSubmit)="login(formLogin)" #formLogin="ngForm">
           <ion-row>
-            <ion-col>
+            <ion-col size="2">
+              <ion-icon name="person" class="icon-contents"></ion-icon>
+            </ion-col>
+            <ion-col size="10">
               <ion-item>
-                <ion-avatar>
-                  <ion-icon name="person"></ion-icon>
-                </ion-avatar>
                 <ion-label position="floating">Usuario<ion-text color="danger">*</ion-text>
                 </ion-label>
                 <ion-input type="text" [(ngModel)]="loginUser.name" name="name" pattern="[a-zA-Z]{3,}" required>
@@ -30,8 +30,8 @@
               </ion-button>
             </ion-col>
           </ion-row>
-        </ion-grid>
-      </form>
+        </form>
+      </ion-grid>
     </ion-slide>
     <!-- Formulario Registro -->
     <ion-slide>

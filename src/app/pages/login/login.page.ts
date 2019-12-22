@@ -88,6 +88,7 @@ export class LoginPage implements OnInit {
     const validated = await this.userService.login(this.loginUser.name);
 
     if (!validated) {
+      this.uiService.dismissPresentLoading();
       this.uiService.presentAlert('Usuario incorrecto');
       return;
     }

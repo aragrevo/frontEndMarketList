@@ -15,7 +15,6 @@ export class Tab2Page implements OnInit {
   titulo = 'Mercado';
   categories: Category[] = [];
   idCategory = '';
-  // activated = false;
 
   @ViewChild('slidesCategory', { static: true }) slidesCategory: IonSlides;
 
@@ -32,13 +31,8 @@ export class Tab2Page implements OnInit {
     });
   }
 
-  ionViewWillLeave() {
-    this.storage.get('market').then(market => {
-      console.log('storage : ', market);
-    });
-  }
-
   async categoryChanged() {
+
     this.idCategory = await this.slidesCategory.getActiveIndex().then(index => this.categories[index]._id);
   }
 

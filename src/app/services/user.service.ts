@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { Storage } from '@ionic/storage';
 import { User } from '../interfaces/interfaces';
 import { NavController } from '@ionic/angular';
+import { UiServiceService } from './ui-service.service';
 
 const URL = environment.url;
 
@@ -18,11 +19,13 @@ export class UserService {
   constructor(
     private http: HttpClient,
     private storage: Storage,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private uiService: UiServiceService
   ) { }
 
   login(name: string) {
     const data = { name };
+    this.uiService.presentLoadingWithOptions();
 
     return new Promise(resolve => {
 

@@ -12,7 +12,8 @@ export class SubcategoriesComponent implements OnChanges {
 
   subcategories: Subcategory[] = [];
   idSubcategory = '';
-  // skeleton = ['30%', '60%', '80%', '10%', '100%'];
+  loading = false;
+  skeleton = ['30%', '60%', '80%', '10%', '100%'];
 
 
   @Input() idCategory: string;
@@ -22,16 +23,17 @@ export class SubcategoriesComponent implements OnChanges {
   constructor(private marketsService: MarketsService) { }
 
   ngOnChanges() {
+    this.loading = true;
     this.marketsService.getSubcategories(this.idCategory).subscribe(resp => {
       this.subcategories = [...resp.subcategories] || [];
       this.slidesSubcategory.lockSwipes(true);
+      this.loading = false;
     });
   }
 
   slideSubChanged() {
     this.slidesSubcategory.getActiveIndex().then(index => {
       if (index === 0) {
-        console.log('slidesSubcategory changed');
         this.slidesSubcategory.lockSwipes(true);
         this.slideCategory.emit(false);
       }

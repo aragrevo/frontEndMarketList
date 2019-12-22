@@ -5,6 +5,8 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../interfaces/interfaces';
 import { Storage } from '@ionic/storage';
 import { StorageService } from '../../services/storage.service';
+import { UiServiceService } from '../../services/ui-service.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -22,6 +24,8 @@ export class Tab1Page implements OnInit {
     private marketsService: MarketsService,
     private userService: UserService,
     private storageService: StorageService,
+    private uiService: UiServiceService,
+    private navCtrl: NavController,
     private storage: Storage) { }
 
   ngOnInit() {
@@ -30,6 +34,7 @@ export class Tab1Page implements OnInit {
         return;
       }
       this.loadDataStorage();
+      this.uiService.dismissPresentLoading();
       this.user = this.userService.getUser();
     });
 
@@ -52,5 +57,10 @@ export class Tab1Page implements OnInit {
     if (event) {
       event.target.complete();
     }
+  }
+
+  goTab2() {
+    // this.navCtrl.navigateForward('/main/tabs/tab2');
+    this.navCtrl.navigateRoot('/main/tabs/tab2', { animated: true });
   }
 }

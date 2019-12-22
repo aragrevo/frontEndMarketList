@@ -1,4 +1,5 @@
-<ion-list>
+<ion-spinner name="circles" color="danger" *ngIf="loading"></ion-spinner>
+<ion-list *ngIf="!loading">
   <ion-item *ngFor="let product of products">
     <ion-text position="fixed">{{product.product}} </ion-text>
     <ion-input type="number" [value]="product.quantity" readonly class="ion-text-right marginX"></ion-input>

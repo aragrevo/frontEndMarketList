@@ -14,6 +14,7 @@ export class ProductsComponent implements OnChanges, OnInit {
 
   products: OrderProduct[] = [];
   productsOrder: OrderProduct[] = [];
+  loading = false;
 
 
   @Input() idSubcategory: string;
@@ -31,12 +32,14 @@ export class ProductsComponent implements OnChanges, OnInit {
   }
 
   ngOnChanges() {
+    this.loading = true;
     this.marketsService.getProducts().subscribe(resp => {
       this.products = resp.products.filter((x, index) => {
         return x.subcategory._id === this.idSubcategory;
       }).map(x => {
         return { _id: x._id, product: x.product, quantity: 0 };
       });
+      this.loading = false;
     });
   }
 
