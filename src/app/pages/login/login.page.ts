@@ -68,18 +68,6 @@ export class LoginPage implements OnInit {
 
   }
 
-  showLogin() {
-    this.slides.lockSwipes(false);
-    this.slides.slideTo(0);
-    this.slides.lockSwipes(true);
-  }
-
-  showLogup() {
-    this.slides.lockSwipes(false);
-    this.slides.slideTo(1);
-    this.slides.lockSwipes(true);
-  }
-
   async login(formLogin: NgForm) {
     if (formLogin.invalid) {
       return;
@@ -118,6 +106,24 @@ export class LoginPage implements OnInit {
     this.uiService.presentToast(`Bienvenido ${this.logupUser.name}`);
     this.navCtrl.navigateRoot('main/tabs/tab1', { animated: true });
 
+  }
+
+  moveSlideNext() {
+    this.slides.lockSwipes(false);
+    this.slides.slideNext();
+    this.slides.lockSwipes(true);
+  }
+
+  showLogup() {
+    this.slides.lockSwipes(false);
+    this.slides.slideTo(2);
+    this.slides.lockSwipes(true);
+  }
+
+  goSlideHome() {
+    this.slides.lockSwipes(false);
+    this.slides.slideTo(0);
+    this.slides.lockSwipes(true);
   }
 
 }

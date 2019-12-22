@@ -6,6 +6,12 @@ ion-slides {
     display: contents;
 }
 
+.full-slide {
+    background: url(http://lorempixel.com/960/960/city/) no-repeat center;    
+    // background: url(https://cdn.stocksnap.io/img-thumbs/960w/1KLTCDRCF3.jpg) no-repeat center;    
+    background-size: cover;
+}
+
 img {
     margin: 10% 0;
 }
