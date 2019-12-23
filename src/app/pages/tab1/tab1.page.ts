@@ -52,9 +52,11 @@ export class Tab1Page implements OnInit {
   async loadDataStorage(event?) {
     await this.storage.get('market').then(market => {
       this.markets = [...market];
+      console.log(this.markets);
     });
 
     if (event) {
+      console.log(event.target);
       event.target.complete();
     }
   }

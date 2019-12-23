@@ -1,14 +1,16 @@
 <app-header [titulo]="titulo"></app-header>
 
-<ion-content>
-  <ion-searchbar></ion-searchbar>
+<ion-content style="position: relative;">
+  <ion-searchbar (ionInput)="searchInput($event)" #searchbar></ion-searchbar>
 
-  <ion-slides scrollbar=true #slidesCategory (ionSlideDidChange)="categoryChanged()">
+  <ion-slides class="moveTop" scrollbar=true #slidesCategory (ionSlideDidChange)="categoryChanged()">
     <ion-slide *ngFor="let category of categories">
       <img [src]="category.image" alt="Image Category">
     </ion-slide>
   </ion-slides>
 
-  <app-subcategories [idCategory]="idCategory" (slideCategory)="slideLock($event)"></app-subcategories>
+  <app-subcategories style="position: relative; top: -40px;" [idCategory]="idCategory"
+    (slideCategory)="slideLock($event)">
+  </app-subcategories>
 
 </ion-content>

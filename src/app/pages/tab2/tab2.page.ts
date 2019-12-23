@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MarketsService } from '../../services/markets.service';
 import { Category } from 'src/app/interfaces/interfaces';
-import { IonSlides } from '@ionic/angular';
+import { IonSlides, IonSearchbar } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 
@@ -17,6 +17,7 @@ export class Tab2Page implements OnInit {
   idCategory = '';
 
   @ViewChild('slidesCategory', { static: true }) slidesCategory: IonSlides;
+  @ViewChild('searchbar', { static: true }) searchbar: IonSearchbar;
 
 
   constructor(
@@ -38,5 +39,10 @@ export class Tab2Page implements OnInit {
 
   slideLock(activated: boolean) {
     this.slidesCategory.lockSwipes(activated);
+  }
+
+  searchInput(event) {
+    const text = this.searchbar.getInputElement();
+    console.log(text);
   }
 }

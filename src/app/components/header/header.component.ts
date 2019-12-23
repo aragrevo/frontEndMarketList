@@ -26,31 +26,37 @@ export class HeaderComponent implements OnInit {
     this.user = this.userService.getUser();
   }
 
-  logout() {
+  logout(): void {
     this.marketsService.pageMarkets = 0;
     this.userService.logout();
   }
 
-  updateMarket() {
+  updateMarket(): void {
     this.storage.get('market').then(market => {
       if (market.length === 0) {
         this.uiService.presentAlert('No hay nada para agregar');
         return;
       }
+      this.uiService.presentLoadingWithOptions();
       if (!market[0]._id) {
         this.marketsService.createMarket(market).then(resp => {
           if (!resp) { return; }
           this.marketsService.getMarkets(true).then(res => {
-            this.uiService.presentAlert('Productos almacenados en el Servidor');
+            this.showMessage();
           });
         });
         return;
       }
       this.marketsService.updateMarket(market).then(resp => {
         if (!resp) { return; }
-        this.uiService.presentAlert('Productos almacenados en el Servidor');
+        this.showMessage();
       });
     });
+  }
+
+  showMessage(): void {
+    this.uiService.dismissPresentLoading();
+    this.uiService.presentAlert('Productos almacenados en el Servidor');
   }
 
 }

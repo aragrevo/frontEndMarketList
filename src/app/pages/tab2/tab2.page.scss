@@ -1,3 +1,14 @@
 .swiper-slide {
     display: block;
 }
+
+ion-searchbar {
+    z-index: 1;
+    opacity: 0.8;
+}
+
+.moveTop {
+    z-index: 0;
+    position: relative;
+    top: -40px;
+}
