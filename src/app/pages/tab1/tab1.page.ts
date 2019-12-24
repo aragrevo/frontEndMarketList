@@ -18,7 +18,7 @@ export class Tab1Page implements OnInit {
   markets: Market[] = [];
   user: User = {};
   isRequest = false;
-  titulo = 'Pedidos';
+  titulo = 'Lista';
 
   constructor(
     private marketsService: MarketsService,
@@ -52,7 +52,6 @@ export class Tab1Page implements OnInit {
   async loadDataStorage(event?) {
     await this.storage.get('market').then(market => {
       this.markets = [...market];
-      console.log(this.markets);
     });
 
     if (event) {

@@ -1,0 +1,56 @@
+<ion-header no-border>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-card>
+    <img
+      src="https://negativespace.co/wp-content/uploads/2018/05/negative-space-vintage-bakery-store-school-bike-daria-shevtsova-thumb-1.jpg">
+    <ion-card-header>
+      <ion-card-title>Agregar Producto</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="myform" (ngSubmit)="createProduct()">
+        <ion-list>
+          <!-- <ion-list-header>Agregar Producto</ion-list-header> -->
+
+          <ion-item>
+            <ion-label>Categoría</ion-label>
+            <ion-select cancelText="Cancelar" (ionChange)="selectCategory($event)" class="ion-text-left"
+              formControlName="category">
+              <ion-select-option *ngFor="let categoria of categories" [value]="categoria._id">{{categoria.category}}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Subcategoría</ion-label>
+            <ion-select [disabled]="!hasCategory" (ionChange)="selectSubcategory($event)" formControlName="subcategory">
+              <ion-select-option *ngFor="let subcategory of subcategories" [value]="subcategory._id">
+                {{subcategory.subcategory}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-input type="text" placeholder="Nombre producto" [disabled]="!hasSubcategory" formControlName="product"
+              pattern="[a-zA-Z\s]{3,}">
+            </ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-button type="submit" color="dark" [disabled]="!myform.valid">
+          <ion-icon slot="icon-only" name="send"></ion-icon>
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+
+
+</ion-content>

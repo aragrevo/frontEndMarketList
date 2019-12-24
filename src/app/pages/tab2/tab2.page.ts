@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MarketsService } from '../../services/markets.service';
 import { Category } from 'src/app/interfaces/interfaces';
-import { IonSlides, IonSearchbar } from '@ionic/angular';
+import { IonSlides, IonSearchbar, ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { Subcategory } from '../../interfaces/interfaces';
+import { ModalProductPage } from '../modal-product/modal-product.page';
 
 
 @Component({
@@ -12,8 +14,9 @@ import { Storage } from '@ionic/storage';
 })
 export class Tab2Page implements OnInit {
 
-  titulo = 'Mercado';
+  titulo = 'Productos';
   categories: Category[] = [];
+  subcategories: Subcategory[] = [];
   idCategory = '';
 
   @ViewChild('slidesCategory', { static: true }) slidesCategory: IonSlides;
@@ -22,7 +25,8 @@ export class Tab2Page implements OnInit {
 
   constructor(
     private marketsService: MarketsService,
-    private storage: Storage
+    private storage: Storage,
+    private modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
@@ -41,8 +45,21 @@ export class Tab2Page implements OnInit {
     this.slidesCategory.lockSwipes(activated);
   }
 
-  searchInput(event) {
-    const text = this.searchbar.getInputElement();
+  async searchInput(event) {
+    const text = await this.searchbar.getInputElement().then(x => {
+      return x.value;
+    });
     console.log(text);
+  }
+
+  async addProduct() {
+    const modal = await this.modalCtrl.create({
+      component: ModalProductPage,
+      componentProps: {
+        categories: this.categories
+      }
+    });
+    console.log('Add Product');
+    return await modal.present();
   }
 }

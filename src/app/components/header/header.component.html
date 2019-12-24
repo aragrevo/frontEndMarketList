@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-icon slot="icon-only" name="bonfire" *ngIf="titulo === 'Pedidos'"></ion-icon>
-      <ion-avatar *ngIf="titulo === 'Mercado'">
+      <ion-icon slot="icon-only" name="bonfire" *ngIf="titulo === 'Lista'"></ion-icon>
+      <ion-avatar *ngIf="titulo === 'Productos'">
         <img src="assets/avatars/{{user.avatar}}" alt="avatar">
       </ion-avatar>
     </ion-buttons>
@@ -11,10 +11,15 @@
         <ion-icon slot="icon-only" name="exit"></ion-icon>
       </ion-button>
 
-      <ion-button fill="outline" (click)="updateMarket()" *ngIf="titulo === 'Pedidos'" [disabled]="!this.user._id">
+      <ion-fab-button color="medium" fill="outline" (click)="updateMarket()" *ngIf="titulo === 'Lista'"
+        [disabled]="!this.user._id">
+        <ion-icon name="cart"></ion-icon>
+      </ion-fab-button>
+
+      <!-- <ion-button fill="outline" (click)="updateMarket()" *ngIf="titulo === 'Lista'" [disabled]="!this.user._id">
         <ion-icon slot="start" name="cart"></ion-icon>
         Solicitar
-      </ion-button>
+      </ion-button> -->
     </ion-buttons>
     <ion-title>
       {{titulo}}

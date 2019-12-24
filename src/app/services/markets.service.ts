@@ -104,4 +104,12 @@ export class MarketsService {
         });
     });
   }
+
+  createProduct(product) {
+    return new Promise(resolve => {
+      this.http.post(`${URL}/products/product`, product).subscribe(resp => {
+        resolve(resp);
+      });
+    });
+  }
 }
