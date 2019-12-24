@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MarketsService } from '../../services/markets.service';
 import { Category } from 'src/app/interfaces/interfaces';
 import { IonSlides, IonSearchbar, ModalController } from '@ionic/angular';
-import { Storage } from '@ionic/storage';
 import { Subcategory } from '../../interfaces/interfaces';
 import { ModalProductPage } from '../modal-product/modal-product.page';
 
@@ -25,7 +24,6 @@ export class Tab2Page implements OnInit {
 
   constructor(
     private marketsService: MarketsService,
-    private storage: Storage,
     private modalCtrl: ModalController
   ) { }
 
@@ -59,7 +57,6 @@ export class Tab2Page implements OnInit {
         categories: this.categories
       }
     });
-    console.log('Add Product');
     return await modal.present();
   }
 }
