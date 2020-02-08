@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +8,11 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  constructor(private userService: UserService) { }
+
+  getProfile() {
+    const profileUser = this.userService.getUser().profile;
+    return (profileUser === 'person') ? true : false;
+  }
 
 }

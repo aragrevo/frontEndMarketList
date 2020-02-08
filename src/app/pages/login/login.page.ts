@@ -82,7 +82,12 @@ export class LoginPage implements OnInit {
     }
 
     this.uiService.presentToast(`Bienvenido ${this.loginUser.name}`);
-    this.navCtrl.navigateRoot('main/tabs/tab1', { animated: true });
+
+    if (this.userService.getUser().profile === 'person') {
+      this.navCtrl.navigateRoot('main/tabs/tab1', { animated: true });
+      return;
+    }
+    this.navCtrl.navigateRoot('main/tabs/tab4', { animated: true });
   }
 
   async logup(formLogup: NgForm) {

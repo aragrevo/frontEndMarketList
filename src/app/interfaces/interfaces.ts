@@ -16,6 +16,7 @@ export interface User {
     avatar?: string;
     _id?: string;
     name?: string;
+    profile?: string;
 }
 
 export interface OrderProduct {
