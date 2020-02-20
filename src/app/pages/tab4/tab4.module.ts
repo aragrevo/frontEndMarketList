@@ -5,13 +5,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab4Page } from './tab4.page';
 import { ComponentsModule } from '../../components/components.module';
+import { ModalProductPage } from '../modal-product/modal-product.page';
+import { ModalProductPageModule } from '../modal-product/modal-product.module';
 
 @NgModule({
+  entryComponents: [
+    ModalProductPage
+  ],
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
     ComponentsModule,
+    ModalProductPageModule,
     RouterModule.forChild([{ path: '', component: Tab4Page }])
   ],
   declarations: [Tab4Page]

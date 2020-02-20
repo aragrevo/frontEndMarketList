@@ -13,6 +13,7 @@ import { UiServiceService } from '../../services/ui-service.service';
 export class HeaderComponent implements OnInit {
 
   @Input() titulo: string;
+  @Input() colorUser: string;
   user: User = {};
 
   constructor(

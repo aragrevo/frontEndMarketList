@@ -36,3 +36,4 @@ export class AppModule { }
 
 // node dist/
 // "C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath="c:\data\db"
+// ionic serve -o

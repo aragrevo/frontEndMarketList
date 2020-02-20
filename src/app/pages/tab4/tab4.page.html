@@ -1,5 +1,11 @@
-<app-header [titulo]="titulo"></app-header>
+<app-header [titulo]="titulo" [colorUser]="'dark'"></app-header>
 
 <ion-content class="ion-padding">
 
 </ion-content>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="dark" size="small" (click)="createProduct()">
+        <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+</ion-fab>

@@ -14,6 +14,7 @@ export class Tab3Page implements OnInit {
 
   titulo = 'Usuario';
   user: User = {};
+  colorUser = '';
 
   constructor(
     private userService: UserService,
@@ -22,6 +23,9 @@ export class Tab3Page implements OnInit {
 
   ngOnInit() {
     this.user = this.userService.getUser();
+    if (this.user.profile === 'admin') {
+      this.colorUser = 'dark';
+    }
   }
 
   async update(formUpdate: NgForm) {
