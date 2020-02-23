@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 export class StorageService {
 
   newMarket = new EventEmitter<Market>();
+  newItem = new EventEmitter<any>();
 
   constructor(
     private storage: Storage
@@ -26,5 +27,11 @@ export class StorageService {
       products
     }];
     this.saveMarket(market);
+  }
+
+  saveItem(item: any) {
+    this.storage.set('items', item).then(items => {
+      this.newItem.emit(items);
+    });
   }
 }

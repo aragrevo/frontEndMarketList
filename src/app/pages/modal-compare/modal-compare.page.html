@@ -1,0 +1,51 @@
+<ion-header no-border>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{item.product}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Adicionando</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="none">
+        <ion-avatar slot="start">
+          <img src="https://www.gravatar.com/avatar/${i + originalLength}?d=monsterid&f=y">
+        </ion-avatar>
+        <ion-label>
+          <h2>Precio: ${{x.price}}</h2>
+          <p>Gramaje: {{x.gramaje}} g/lt</p>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Mejor</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Último</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" (click)="insertQuantity()">
+    <ion-icon slot="icon-only" name="cart"></ion-icon>
+  </ion-button>
+</ion-content>

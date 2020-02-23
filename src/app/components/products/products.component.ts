@@ -34,7 +34,7 @@ export class ProductsComponent implements OnChanges, OnInit {
   ngOnChanges() {
     this.loading = true;
     this.marketsService.getProducts().subscribe(resp => {
-      this.products = resp.products.filter((x, index) => {
+      this.products = resp.filter((x, index) => {
         return x.subcategory._id === this.idSubcategory;
       }).map(x => {
         return { _id: x._id, product: x.product, quantity: 0 };

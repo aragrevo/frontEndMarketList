@@ -7,10 +7,13 @@ import { Tab4Page } from './tab4.page';
 import { ComponentsModule } from '../../components/components.module';
 import { ModalProductPage } from '../modal-product/modal-product.page';
 import { ModalProductPageModule } from '../modal-product/modal-product.module';
+import { ModalAddProductPageModule } from '../modal-add-product/modal-add-product.module';
+import { ModalAddProductPage } from '../modal-add-product/modal-add-product.page';
 
 @NgModule({
   entryComponents: [
-    ModalProductPage
+    ModalProductPage,
+    ModalAddProductPage
   ],
   imports: [
     IonicModule,
@@ -18,6 +21,7 @@ import { ModalProductPageModule } from '../modal-product/modal-product.module';
     FormsModule,
     ComponentsModule,
     ModalProductPageModule,
+    ModalAddProductPageModule,
     RouterModule.forChild([{ path: '', component: Tab4Page }])
   ],
   declarations: [Tab4Page]

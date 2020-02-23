@@ -6,6 +6,8 @@ import { UserService } from './user.service';
 import { StorageService } from './storage.service';
 import { Storage } from '@ionic/storage';
 
+import { map } from 'rxjs/operators';
+
 
 const URL = environment.url;
 
@@ -61,7 +63,13 @@ export class MarketsService {
   }
 
   getProducts() {
-    return this.http.get<ResponseProducts>(`${URL}/products/product`);
+    return this.http.get<ResponseProducts>(`${URL}/products/product`).pipe(
+      map(resp => {
+        return resp.products.sort((a, b) => {
+          return (b.product > a.product) ? -1 : 1;
+        });
+      })
+    );
   }
 
   createMarket(market: Market) {

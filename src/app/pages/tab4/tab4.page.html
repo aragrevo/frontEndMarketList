@@ -1,11 +1,29 @@
 <app-header [titulo]="titulo" [colorUser]="'dark'"></app-header>
 
-<ion-content class="ion-padding">
 
+<ion-content class="ion-padding">
+    <ion-item-divider>
+        <ion-label>Total: ${{total}}</ion-label>
+        <ion-button slot="end" (click)="saveItems()">
+            <ion-icon slot="icon-only" name="cart"></ion-icon>
+        </ion-button>
+    </ion-item-divider>
+    <ion-list>
+        <ion-item *ngFor="let item of items">
+            <ion-label>
+                <h2>{{item.product}}</h2>
+                <p>gramaje: {{item.gramaje}}</p>
+                <p>Precio unitario: {{item.price}} * Cantidad: {{item.quantity}}</p>
+            </ion-label>
+            <ion-note slot="end">
+                ${{item.price*item.quantity}}
+            </ion-note>
+        </ion-item>
+    </ion-list>
 </ion-content>
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="dark" size="small" (click)="createProduct()">
+    <ion-fab-button color="dark" size="small" (click)="addProduct()">
         <ion-icon name="add"></ion-icon>
     </ion-fab-button>
 </ion-fab>
