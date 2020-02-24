@@ -22,26 +22,55 @@
           <img src="https://www.gravatar.com/avatar/${i + originalLength}?d=monsterid&f=y">
         </ion-avatar>
         <ion-label>
-          <h2>Precio: ${{x.price}}</h2>
-          <p>Gramaje: {{x.gramaje}} g/lt</p>
+          <h2>Precio: ${{currentBuy.price}}</h2>
+          <p>Gramaje: {{currentBuy.gramaje}} g ó lt</p>
         </ion-label>
+        <ion-note>
+          <p>{{currentBuy.ratio}} $/g</p>
+        </ion-note>
       </ion-item>
     </ion-card-content>
   </ion-card>
   <ion-card>
     <ion-card-header>
       <ion-card-title>Mejor</ion-card-title>
+      <ion-card-subtitle>{{bestBuy.date | date }} - <span><i><b>{{bestBuy.store}}</b></i></span></ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-
+      <ion-item lines="none">
+        <ion-avatar slot="start">
+          <img src="https://www.gravatar.com/avatar/${i + originalLength}?d=monsterid&f=y">
+        </ion-avatar>
+        <ion-label>
+          <h2>Precio: ${{bestBuy.price}}</h2>
+          <p>Gramaje: {{bestBuy.gramaje}} g ó lt</p>
+        </ion-label>
+        <ion-note>
+          <p>{{bestBuy.ratio}} $/g</p>
+        </ion-note>
+      </ion-item>
     </ion-card-content>
   </ion-card>
+
   <ion-card>
     <ion-card-header>
       <ion-card-title>Último</ion-card-title>
+      <ion-card-subtitle>{{lastBuy.date | date }} - <span><i><b>{{lastBuy.store}}</b></i></span>
+      </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-
+      <ion-item lines="none">
+        <ion-avatar slot="start">
+          <img src="https://www.gravatar.com/avatar/${i + originalLength}?d=monsterid&f=y">
+        </ion-avatar>
+        <ion-label>
+          <h2>Precio: ${{lastBuy.price}}</h2>
+          <p>Gramaje: {{lastBuy.gramaje}} g ó lt</p>
+        </ion-label>
+        <ion-note>
+          <p>{{lastBuy.ratio}} $/g</p>
+        </ion-note>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 

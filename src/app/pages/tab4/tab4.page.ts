@@ -7,6 +7,7 @@ import { MarketsService } from '../../services/markets.service';
 import { ModalAddProductPage } from '../modal-add-product/modal-add-product.page';
 import { Storage } from '@ionic/storage';
 import { StorageService } from '../../services/storage.service';
+import { BuyService } from '../../services/buy.service';
 
 @Component({
   selector: 'app-tab4',
@@ -16,7 +17,6 @@ import { StorageService } from '../../services/storage.service';
 export class Tab4Page implements OnInit {
 
   titulo = 'Productos';
-  categories: Category[] = [];
   items = [];
   total = 0;
 
@@ -25,20 +25,16 @@ export class Tab4Page implements OnInit {
     private modalCtrl: ModalController,
     private marketsService: MarketsService,
     private storage: Storage,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private buyService: BuyService
   ) { }
 
   ngOnInit() {
     this.uiService.dismissPresentLoading();
-    this.marketsService.getCategories().subscribe(resp => {
-      this.categories.push(...resp.categories);
-      this.loadDataStorage();
-    });
+    this.loadDataStorage();
 
     this.storageService.newItem.subscribe(item => {
       this.items = [];
-      // this.items.push(...item);
-      // console.log(this.items);
       this.loadDataStorage();
     });
   }
@@ -50,23 +46,36 @@ export class Tab4Page implements OnInit {
     return await modal.present();
   }
 
-  async createProduct() {
-    const modal = await this.modalCtrl.create({
-      component: ModalProductPage,
-      componentProps: {
-        categories: this.categories
-      }
-    });
-    return await modal.present();
-  }
-
   saveItems() {
-    console.log('saveds');
+    const buy = {
+      date: new Date(),
+      store: 'ARA',
+      total: this.total,
+      geo: '90.90',
+      items: this.items
+    };
+    this.buyService.saveBuy(buy).then(resp => {
+      console.log(resp);
+      // tslint:disable-next-line: no-string-literal
+      if (!resp['ok']) {
+        // tslint:disable-next-line: no-string-literal
+        this.uiService.presentAlert(resp['message']);
+        return;
+      }
+      // tslint:disable-next-line: no-string-literal
+      this.uiService.presentAlert(resp['message']);
+      this.storage.clear();
+      this.items = [];
+      this.total = 0;
+    });
   }
 
   async loadDataStorage() {
     await this.storage.get('items').then(item => {
       this.items.push(...item);
+      if (!this.items) {
+        return;
+      }
       this.items.forEach(x => {
         this.total += x.price * x.quantity;
       });

@@ -5,6 +5,7 @@ import { UiServiceService } from '../../services/ui-service.service';
 import { ModalComparePage } from '../modal-compare/modal-compare.page';
 import { StorageService } from '../../services/storage.service';
 import { Storage } from '@ionic/storage';
+import { ModalProductPage } from '../modal-product/modal-product.page';
 
 @Component({
   selector: 'app-modal-add-product',
@@ -14,6 +15,7 @@ import { Storage } from '@ionic/storage';
 export class ModalAddProductPage implements OnInit {
 
   products = [];
+  categories = [];
   textToSearch = '';
 
   constructor(
@@ -29,6 +31,10 @@ export class ModalAddProductPage implements OnInit {
     this.marketsService.getProducts().subscribe(resp => {
       this.products = [...resp];
     });
+
+    this.marketsService.getCategories().subscribe(resp => {
+      this.categories.push(...resp.categories);
+    });
   }
 
   dismissModal() {
@@ -36,12 +42,10 @@ export class ModalAddProductPage implements OnInit {
   }
 
   searchProduct(event) {
-    console.log(event.detail.value);
     this.textToSearch = event.detail.value;
   }
 
   async selectedProduct(item) {
-    console.log(item);
     const alert = await this.alertCtrl.create({
       header: item.product,
       subHeader: item.subcategory.subcategory,
@@ -127,5 +131,15 @@ export class ModalAddProductPage implements OnInit {
     itemsUser.push(item);
     await this.storageService.saveItem(itemsUser);
 
+  }
+
+  async createProduct() {
+    const modal = await this.modalCtrl.create({
+      component: ModalProductPage,
+      componentProps: {
+        categories: this.categories
+      }
+    });
+    return await modal.present();
   }
 }
