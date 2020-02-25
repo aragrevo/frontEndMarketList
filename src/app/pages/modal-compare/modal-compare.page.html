@@ -23,7 +23,8 @@
         </ion-avatar>
         <ion-label>
           <h2>Precio: ${{currentBuy.price}}</h2>
-          <p>Gramaje: {{currentBuy.gramaje}} g ó lt</p>
+          <p *ngIf="currentBuy.gramaje !== ''">Gramaje: {{currentBuy.gramaje}} g ó lt</p>
+          <p *ngIf="currentBuy.unit !== ''">Unidades: {{currentBuy.unit}} und</p>
         </ion-label>
         <ion-note>
           <p>{{currentBuy.ratio}} $/g</p>
@@ -43,7 +44,8 @@
         </ion-avatar>
         <ion-label>
           <h2>Precio: ${{bestBuy.price}}</h2>
-          <p>Gramaje: {{bestBuy.gramaje}} g ó lt</p>
+          <p *ngIf="bestBuy.gramaje !== ''">Gramaje: {{bestBuy.gramaje}} g ó lt</p>
+          <p *ngIf="bestBuy.unit !== ''">Unidades: {{bestBuy.gramaje}} g ó lt</p>
         </ion-label>
         <ion-note>
           <p>{{bestBuy.ratio}} $/g</p>
@@ -65,7 +67,8 @@
         </ion-avatar>
         <ion-label>
           <h2>Precio: ${{lastBuy.price}}</h2>
-          <p>Gramaje: {{lastBuy.gramaje}} g ó lt</p>
+          <p *ngIf="lastBuy.gramaje !== ''">Gramaje: {{lastBuy.gramaje}} g ó lt</p>
+          <p *ngIf="lastBuy.unit !== ''">Unidades: {{lastBuy.gramaje}} g ó lt</p>
         </ion-label>
         <ion-note>
           <p>{{lastBuy.ratio}} $/g</p>

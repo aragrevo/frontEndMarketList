@@ -19,12 +19,14 @@ export class ModalComparePage implements OnInit {
   currentBuy = {
     ratio: '',
     price: '',
-    gramaje: ''
+    gramaje: '',
+    unit: ''
   };
   lastBuy = {
     date: '',
     price: '',
     gramaje: '',
+    unit: '',
     store: '',
     ratio: ''
   };
@@ -32,6 +34,7 @@ export class ModalComparePage implements OnInit {
     date: '',
     price: '',
     gramaje: '',
+    unit: '',
     store: '',
     ratio: ''
   };
@@ -87,11 +90,12 @@ export class ModalComparePage implements OnInit {
         }
       });
 
-      this.currentBuy = { ...this.x, ratio: this.x.price / this.x.gramaje };
+      const currentRatio = (this.x.gramaje === '') ? this.x.price / this.x.unit : this.x.price / this.x.gramaje;
+
+      this.currentBuy = { ...this.x, ratio: currentRatio };
 
       this.bestBuy = { ...this.buys[saveIndex] };
       this.lastBuy = { ...this.buys[this.buys.length - 1] };
-      // this.compareItems();
     });
   }
 
@@ -138,30 +142,5 @@ export class ModalComparePage implements OnInit {
     await alert.present();
   }
 
-  public compareItems() {
-    console.log(this.buys);
-    console.log(this.lastBuy);
-  }
-
 }
 
-// const itemess = buys.filter(x => {
-//   if (x.items.length > 1) {
-//       const newMap = x.items.map((value, index) => {
-//           if (value._id === id) {
-//               return {
-//                   items: value,
-//                   _id: x._id,
-//                   date: x.date,
-//                   store: x.store,
-//                   total: x.total,
-//                   geo: x.geo
-//               };
-//           }
-//       })
-//       console.log(newMap);
-
-//       return;
-//   }
-//   return true;
-// })

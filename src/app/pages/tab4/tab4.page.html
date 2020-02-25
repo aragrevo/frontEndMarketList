@@ -3,22 +3,34 @@
 
 <ion-content class="ion-padding">
     <ion-item-divider>
-        <ion-label>Total: ${{total}}</ion-label>
-        <ion-button slot="end" (click)="saveItems()">
+        <ion-label>Total: <ion-badge>$ {{total}}</ion-badge>
+        </ion-label>
+        <ion-button slot="end" (click)="confirmSaveItems()">
             <ion-icon slot="icon-only" name="cart"></ion-icon>
         </ion-button>
     </ion-item-divider>
     <ion-list>
-        <ion-item *ngFor="let item of items">
-            <ion-label>
-                <h2>{{item.product}}</h2>
-                <p>gramaje: {{item.gramaje}}</p>
-                <p>Precio unitario: {{item.price}} * Cantidad: {{item.quantity}}</p>
-            </ion-label>
-            <ion-note slot="end">
-                ${{item.price*item.quantity}}
-            </ion-note>
-        </ion-item>
+        <ion-item-sliding *ngFor="let item of items">
+            <ion-item>
+                <ion-label>
+                    {{item.product}}
+                    <ion-note *ngIf="item.gramaje !== ''">
+                        {{item.gramaje}} gr
+                    </ion-note>
+                    <ion-note *ngIf="item.unit !== ''">{{item.unit}} und</ion-note>
+
+                    <p>{{item.quantity}} UN X {{item.price}}</p>
+                </ion-label>
+                <ion-note slot="end">
+                    ${{item.price*item.quantity}}
+                </ion-note>
+            </ion-item>
+            <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="removeItem(item)">
+                    <ion-icon slot="icon-only" name="trash"></ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
     </ion-list>
 </ion-content>
 

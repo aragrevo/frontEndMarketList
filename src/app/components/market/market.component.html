@@ -6,9 +6,6 @@
     </ion-item-divider>
 
     <ion-item-group *ngFor="let item of market.products">
-      <!-- <ion-item-divider>
-        {{byCategory.category}}
-      </ion-item-divider> -->
       <ion-item>
         <ion-button fill="clear" (click)="deleteProduct(item._id)">
           <ion-icon slot="icon-only" name="close"></ion-icon>

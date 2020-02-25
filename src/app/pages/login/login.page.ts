@@ -50,7 +50,7 @@ export class LoginPage implements OnInit {
   ];
 
   loginUser = {
-    name: 'Test'
+    name: 'TestAdmin'
   };
 
   logupUser = {

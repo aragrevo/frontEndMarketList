@@ -21,6 +21,35 @@ export class UiServiceService {
     await alert.present();
   }
 
+  confirmAlert(message: string) {
+
+    return new Promise(async (resolve) => {
+
+      const alert = await this.alertCtrl.create({
+        message,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('Confirm Cancel');
+              return resolve(false);
+            }
+          }, {
+            text: 'Ok',
+            handler: () => {
+              console.log('Confirm Ok');
+              return resolve(true);
+            }
+          }
+        ]
+      });
+      await alert.present();
+    });
+
+  }
+
   async presentToast(message: string, position: any = 'top') {
     const toast = await this.toastCtrl.create({
       message,
