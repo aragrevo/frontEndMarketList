@@ -95,7 +95,6 @@ export class ModalAddProductPage implements OnInit {
               this.uiService.presentAlert('Gramaje o Unidades, no los dos');
               return;
             }
-            console.log('Confirm Ok', x);
             const modalCompare = await this.modalCtrl.create({
               component: ModalComparePage,
               componentProps: {
@@ -107,7 +106,6 @@ export class ModalAddProductPage implements OnInit {
             await modalCompare.present();
 
             const { data } = await modalCompare.onDidDismiss();
-            console.log('Retorno ', data);
             this.addItemStorage(data);
           }
         }

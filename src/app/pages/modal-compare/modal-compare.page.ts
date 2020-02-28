@@ -79,8 +79,6 @@ export class ModalComparePage implements OnInit {
         };
       });
 
-      console.log(this.buys);
-
       let bestPrice = 0;
       let saveIndex = 0;
       this.buys.forEach((buy, index) => {
@@ -102,7 +100,6 @@ export class ModalComparePage implements OnInit {
       this.bestItem = (this.currentBuy.ratio < this.bestBuy.ratio) ? this.currentBuy : this.bestBuy;
     });
 
-    console.log(this.bestItem);
   }
 
   dismissModal() {

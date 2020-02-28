@@ -27,7 +27,7 @@
           <p *ngIf="currentBuy.unit !== ''">Unidades: {{currentBuy.unit}} und</p>
         </ion-label>
         <ion-note>
-          <p>{{currentBuy.ratio}} $/g</p>
+          <p>{{currentBuy.ratio | number}} $/g</p>
         </ion-note>
       </ion-item>
     </ion-card-content>
@@ -48,7 +48,7 @@
           <p *ngIf="bestBuy.unit !== ''">Unidades: {{bestBuy.gramaje}} g ó lt</p>
         </ion-label>
         <ion-note>
-          <p>{{bestBuy.ratio}} $/g</p>
+          <p>{{bestBuy.ratio |number}} $/g</p>
         </ion-note>
       </ion-item>
     </ion-card-content>
@@ -71,7 +71,7 @@
           <p *ngIf="lastBuy.unit !== ''">Unidades: {{lastBuy.gramaje}} g ó lt</p>
         </ion-label>
         <ion-note>
-          <p>{{lastBuy.ratio}} $/g</p>
+          <p>{{lastBuy.ratio |number}} $/g</p>
         </ion-note>
       </ion-item>
     </ion-card-content>
