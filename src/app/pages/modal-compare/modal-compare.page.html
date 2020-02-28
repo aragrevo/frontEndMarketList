@@ -18,8 +18,8 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item lines="none">
-        <ion-avatar slot="start">
-          <img src="https://www.gravatar.com/avatar/${i + originalLength}?d=monsterid&f=y">
+        <ion-avatar slot="start" *ngIf="bestItem === currentBuy">
+          <img [src]='imageBest'>
         </ion-avatar>
         <ion-label>
           <h2>Precio: ${{currentBuy.price}}</h2>
@@ -39,8 +39,8 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item lines="none">
-        <ion-avatar slot="start">
-          <img src="https://www.gravatar.com/avatar/${i + originalLength}?d=monsterid&f=y">
+        <ion-avatar slot="start" *ngIf="bestItem === bestBuy">
+          <img [src]='imageBest'>
         </ion-avatar>
         <ion-label>
           <h2>Precio: ${{bestBuy.price}}</h2>
@@ -62,8 +62,8 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item lines="none">
-        <ion-avatar slot="start">
-          <img src="https://www.gravatar.com/avatar/${i + originalLength}?d=monsterid&f=y">
+        <ion-avatar slot="start" *ngIf="bestItem === lastBuy">
+          <img [src]='imageBest'>
         </ion-avatar>
         <ion-label>
           <h2>Precio: ${{lastBuy.price}}</h2>

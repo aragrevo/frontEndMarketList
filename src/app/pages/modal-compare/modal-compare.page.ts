@@ -13,6 +13,8 @@ export class ModalComparePage implements OnInit {
 
   @Input() x;
   @Input() item;
+  // tslint:disable-next-line: max-line-length
+  imageBest = 'https://previews.123rf.com/images/anatolir/anatolir1712/anatolir171200836/91728950-logotipo-del-mejor-precio-ilustraci%C3%B3n-simple-del-mejor-logo-de-vector-de-precio-para-web.jpg';
 
   product = {};
   buys = [];
@@ -38,6 +40,7 @@ export class ModalComparePage implements OnInit {
     store: '',
     ratio: ''
   };
+  bestItem = {};
 
   constructor(
     private modalCtrl: ModalController,
@@ -73,7 +76,7 @@ export class ModalComparePage implements OnInit {
           price: item[0].price,
           unit: item[0].unit,
           ratio: ratios
-        }
+        };
       });
 
       console.log(this.buys);
@@ -96,7 +99,10 @@ export class ModalComparePage implements OnInit {
 
       this.bestBuy = { ...this.buys[saveIndex] };
       this.lastBuy = { ...this.buys[this.buys.length - 1] };
+      this.bestItem = (this.currentBuy.ratio < this.bestBuy.ratio) ? this.currentBuy : this.bestBuy;
     });
+
+    console.log(this.bestItem);
   }
 
   dismissModal() {

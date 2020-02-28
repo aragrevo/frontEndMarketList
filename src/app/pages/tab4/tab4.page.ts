@@ -50,7 +50,7 @@ export class Tab4Page implements OnInit {
   async confirmSaveItems() {
 
     const alert = await this.alertCtrl.create({
-      header: 'Prompt!',
+      header: 'Almacen de la compra!',
       inputs: [
         {
           name: 'store',
@@ -125,6 +125,7 @@ export class Tab4Page implements OnInit {
     const confirm = await this.uiService.confirmAlert(`Desea retirar ${itemToRemove.product}?`).then(resp => {
       return resp;
     });
+    console.log(confirm);
     if (!confirm) {
       return;
     }
