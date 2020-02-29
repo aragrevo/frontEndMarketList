@@ -20,6 +20,7 @@ export class ModalAddProductPage implements OnInit {
   newProducts = [];
   categories = [];
   textToSearch = '';
+  data = false;
 
   constructor(
     private modalCtrl: ModalController,
@@ -31,11 +32,10 @@ export class ModalAddProductPage implements OnInit {
     private buyService: BuyService
   ) { }
 
-  async ngOnInit() {
-    await this.marketsService.getProducts().subscribe(resp => {
+  ngOnInit() {
+    this.marketsService.getProducts().subscribe(resp => {
       this.products = [...resp];
-      // console.log(this.products);
-      this.getBuys();
+      this.getBuys().then(() => this.data = true);
     });
 
     this.marketsService.getCategories().subscribe(resp => {
@@ -43,30 +43,34 @@ export class ModalAddProductPage implements OnInit {
     });
   }
 
-  getBuys() {
-    this.products.forEach(x => {
-      // console.log(x);
-      this.buyService.getItem(x._id).subscribe(resp => {
-        // console.log(resp);
+  async getBuys() {
+    const buys = this.products.forEach(product => {
+      this.buyService.getItem(product._id).subscribe(resp => {
         // tslint:disable-next-line: no-string-literal
         if (resp['count'] === 0) {
-          this.newProducts.push(x);
+          this.newProducts.push(product);
         } else {
           // tslint:disable-next-line: no-string-literal
-          const buys = [...resp['buys']].forEach((value, index) => {
+          resp['buys'].forEach((value, index) => {
             const item = value.items.filter(y => {
-              // console.log(y); // y es un objeto tipo item
-              if (y._id === x._id) {
+              if (y._id === product._id) {
                 return true;
               }
             });
-            console.log(item);
-            this.newProducts.push(...item);
+            const newItem = {
+              _id: item[0]._id,
+              product: item[0].product,
+              gramaje: item[0].gramaje,
+              price: item[0].price,
+              unit: item[0].unit,
+              subcategory: product.subcategory.subcategory
+            };
+            this.newProducts.push(newItem);
           });
         }
       });
     });
-    console.log(this.newProducts);
+    await buys;
   }
 
   dismissModal() {
@@ -151,7 +155,6 @@ export class ModalAddProductPage implements OnInit {
       return it;
     });
 
-    console.log(itemsUser);
     if (!itemsUser) {
       this.storageService.saveItem([{ ...item }]);
       return;

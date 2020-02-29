@@ -21,17 +21,19 @@
     <ion-card-content>
 
       <ion-searchbar (ionChange)="searchProduct($event)"></ion-searchbar>
-      <ion-list>
+      <ion-list *ngIf="data">
         <ion-item-sliding *ngFor="let product of newProducts | filterProduct: textToSearch: 'product'">
           <ion-item>
             <ion-label>
               <h2>{{product.product}}</h2>
+              <ion-note slot="start">
+                <small>{{product.subcategory.subcategory || product.subcategory}}</small>
+              </ion-note>
             </ion-label>
-            <ion-note slot="end" *ngIf="product.subcategory">
-              {{product.subcategory.subcategory}}
-            </ion-note>
-            <ion-note slot="end" *ngIf="!product.subcategory">
-              {{product.gramaje}}g - ${{product.price}} - {{product.unit}}un
+            <ion-note slot="end" *ngIf="product.price">
+              ${{product.price}}<br />
+              <span *ngIf="product.gramaje">{{product.gramaje}}g/ml</span>
+              <span *ngIf="product.unit">{{product.unit}}und</span>
             </ion-note>
           </ion-item>
 
@@ -42,6 +44,27 @@
           </ion-item-options>
         </ion-item-sliding>
       </ion-list>
+
+      <div *ngIf="!data">
+        <ion-list>
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
 
     </ion-card-content>
   </ion-card>
