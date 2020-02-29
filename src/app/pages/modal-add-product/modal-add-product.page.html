@@ -22,13 +22,16 @@
 
       <ion-searchbar (ionChange)="searchProduct($event)"></ion-searchbar>
       <ion-list>
-        <ion-item-sliding *ngFor="let product of products | filterProduct: textToSearch: 'product'">
+        <ion-item-sliding *ngFor="let product of newProducts | filterProduct: textToSearch: 'product'">
           <ion-item>
             <ion-label>
               <h2>{{product.product}}</h2>
             </ion-label>
-            <ion-note slot="end">
+            <ion-note slot="end" *ngIf="product.subcategory">
               {{product.subcategory.subcategory}}
+            </ion-note>
+            <ion-note slot="end" *ngIf="!product.subcategory">
+              {{product.gramaje}}g - ${{product.price}} - {{product.unit}}un
             </ion-note>
           </ion-item>
 
