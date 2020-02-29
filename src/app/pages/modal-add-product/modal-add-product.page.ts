@@ -44,8 +44,8 @@ export class ModalAddProductPage implements OnInit {
   }
 
   async getBuys() {
-    const buys = this.products.forEach(product => {
-      this.buyService.getItem(product._id).subscribe(resp => {
+    const buys = await this.products.forEach(async product => {
+      await this.buyService.getItem(product._id).subscribe(resp => {
         // tslint:disable-next-line: no-string-literal
         if (resp['count'] === 0) {
           this.newProducts.push(product);
@@ -141,6 +141,9 @@ export class ModalAddProductPage implements OnInit {
             await modalCompare.present();
 
             const { data } = await modalCompare.onDidDismiss();
+            if (!data) {
+              return;
+            }
             this.addItemStorage(data);
           }
         }

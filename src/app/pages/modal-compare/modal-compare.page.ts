@@ -109,7 +109,6 @@ export class ModalComparePage implements OnInit {
   async insertQuantity() {
     const alert = await this.alertCtrl.create({
       header: 'Cantidad',
-      message: 'This is an alert message.',
       inputs: [
         {
           name: 'quantity',
