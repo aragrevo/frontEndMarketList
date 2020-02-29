@@ -52,11 +52,16 @@ export class ModalAddProductPage implements OnInit {
         } else {
           // tslint:disable-next-line: no-string-literal
           resp['buys'].forEach((value, index) => {
-            const item = value.items.filter(y => {
-              if (y._id === product._id) {
+            const item = value.items.filter(itemIn => {
+              if (itemIn._id === product._id) {
                 return true;
               }
             });
+
+            // Si el item ya existe en newProduct
+            if (this.newProducts.includes(item[0])) {
+              return;
+            }
             const newItem = {
               _id: item[0]._id,
               product: item[0].product,

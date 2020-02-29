@@ -13,12 +13,12 @@
 
 <ion-content class="ion-padding">
   <!-- Card Current -->
-  <ion-card>
+  <ion-card [color]="(bestItem === currentBuy) ? 'light' : ''">
     <ion-card-header>
       <ion-card-title>Adicionando</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-item lines="none">
+      <ion-item lines="none" [color]="(bestItem === currentBuy) ? 'light' : ''">
         <ion-avatar slot="start" *ngIf="bestItem === currentBuy">
           <img [src]='imageBest'>
         </ion-avatar>
@@ -34,50 +34,54 @@
     </ion-card-content>
   </ion-card>
   <!-- Card Best -->
-  <ion-card *ngIf="bestBuy.price">
-    <ion-card-header>
-      <ion-card-title>Mejor</ion-card-title>
-      <ion-card-subtitle>{{bestBuy.date | date }} - <span><i><b>{{bestBuy.store}}</b></i></span></ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item lines="none">
-        <ion-avatar slot="start" *ngIf="bestItem === bestBuy">
-          <img [src]='imageBest'>
-        </ion-avatar>
-        <ion-label>
-          <h2>Precio: ${{bestBuy.price}}</h2>
-          <p *ngIf="bestBuy.gramaje !== ''">Gramaje: {{bestBuy.gramaje}} g ó lt</p>
-          <p *ngIf="bestBuy.unit !== ''">Unidades: {{bestBuy.gramaje}} g ó lt</p>
-        </ion-label>
-        <ion-note>
-          <p>{{bestBuy.ratio |number}} $/g</p>
-        </ion-note>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+  <div *ngIf="bestBuy.price">
+    <ion-card [color]="(bestItem === bestBuy) ? 'light' : ''">
+      <ion-card-header>
+        <ion-card-title>Mejor</ion-card-title>
+        <ion-card-subtitle>{{bestBuy.date | date }} - <span><i><b>{{bestBuy.store}}</b></i></span></ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none" [color]="(bestItem === bestBuy) ? 'light' : ''">
+          <ion-avatar slot="start" *ngIf="bestItem === bestBuy">
+            <img [src]='imageBest'>
+          </ion-avatar>
+          <ion-label>
+            <h2>Precio: ${{bestBuy.price}}</h2>
+            <p *ngIf="bestBuy.gramaje !== ''">Gramaje: {{bestBuy.gramaje}} g ó lt</p>
+            <p *ngIf="bestBuy.unit !== ''">Unidades: {{bestBuy.gramaje}} g ó lt</p>
+          </ion-label>
+          <ion-note>
+            <p>{{bestBuy.ratio |number}} $/g</p>
+          </ion-note>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
   <!-- Card Last -->
-  <ion-card *ngIf="lastBuy.price">
-    <ion-card-header>
-      <ion-card-title>Último</ion-card-title>
-      <ion-card-subtitle>{{lastBuy.date | date }} - <span><i><b>{{lastBuy.store}}</b></i></span>
-      </ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item lines="none">
-        <ion-avatar slot="start" *ngIf="bestItem === lastBuy">
-          <img [src]='imageBest'>
-        </ion-avatar>
-        <ion-label>
-          <h2>Precio: ${{lastBuy.price}}</h2>
-          <p *ngIf="lastBuy.gramaje !== ''">Gramaje: {{lastBuy.gramaje}} g ó lt</p>
-          <p *ngIf="lastBuy.unit !== ''">Unidades: {{lastBuy.gramaje}} g ó lt</p>
-        </ion-label>
-        <ion-note>
-          <p>{{lastBuy.ratio |number}} $/g</p>
-        </ion-note>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+  <div *ngIf="lastBuy.price">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Último</ion-card-title>
+        <ion-card-subtitle>{{lastBuy.date | date }} - <span><i><b>{{lastBuy.store}}</b></i></span>
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-avatar slot="start" *ngIf="bestItem === lastBuy">
+            <img [src]='imageBest'>
+          </ion-avatar>
+          <ion-label>
+            <h2>Precio: ${{lastBuy.price}}</h2>
+            <p *ngIf="lastBuy.gramaje !== ''">Gramaje: {{lastBuy.gramaje}} g ó lt</p>
+            <p *ngIf="lastBuy.unit !== ''">Unidades: {{lastBuy.gramaje}} g ó lt</p>
+          </ion-label>
+          <ion-note>
+            <p>{{lastBuy.ratio |number}} $/g</p>
+          </ion-note>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
   <ion-button expand="block" (click)="insertQuantity()">
     <ion-icon slot="icon-only" name="cart"></ion-icon>
