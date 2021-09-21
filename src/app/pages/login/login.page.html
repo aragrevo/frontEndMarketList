@@ -1,4 +1,4 @@
-<ion-content class="ion-padding">
+<ion-content class="ion-no-padding">
   <ion-slides #slidesPrincipal>
     <!-- Portada -->
     <ion-slide class="full-slide">
@@ -29,33 +29,37 @@
       <ion-grid fixed>
         <ion-row>
           <ion-col>
-            <img src="https://cdn.stocksnap.io/img-thumbs/960w/C6YGDZ1DSW.jpg" alt="avatar">
+            <ion-img src="https://cdn.stocksnap.io/img-thumbs/960w/C6YGDZ1DSW.jpg" alt="avatar"></ion-img>
           </ion-col>
         </ion-row>
 
-        <form (ngSubmit)="login(formLogin)" #formLogin="ngForm">
-          <ion-row>
-            <ion-col size="2">
-              <ion-icon name="person" class="icon-contents"></ion-icon>
-            </ion-col>
-            <ion-col size="10">
-              <ion-item>
-                <ion-label position="floating">Usuario<ion-text color="danger">*</ion-text>
-                </ion-label>
-                <ion-input type="text" [(ngModel)]="loginUser.name" name="name" pattern="[a-zA-Z]{3,}" required>
-                </ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-button type="submit" color="tertiary" shape="round" [disabled]="!formLogin.valid">
-                Login
-                <ion-icon slot="end" name="appstore"></ion-icon>
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </form>
+        <ion-row>
+          <ion-col>
+            <form (ngSubmit)="login(formLogin)" #formLogin="ngForm">
+              <ion-row>
+                <ion-col size="2">
+                  <ion-icon name="person" class="icon-contents"></ion-icon>
+                </ion-col>
+                <ion-col size="10">
+                  <ion-item>
+                    <ion-label position="floating">Usuario<ion-text color="danger">*</ion-text>
+                    </ion-label>
+                    <ion-input type="text" [(ngModel)]="loginUser.name" name="name" pattern="[a-zA-Z]{3,}" required>
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <ion-button type="submit" color="tertiary" shape="round" [disabled]="!formLogin.valid">
+                    Login
+                    <ion-icon slot="end" name="appstore"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </form>
+          </ion-col>
+        </ion-row>
       </ion-grid>
     </ion-slide>
 
